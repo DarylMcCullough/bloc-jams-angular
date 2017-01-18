@@ -24,11 +24,8 @@
          * @param {Object} song
          */
         var setSong = function(song) {
-            if (currentBuzzObject) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
-            }
-
+            stopSong();
+            
             currentBuzzObject = new buzz.sound(song.audioUrl, {
                 formats: ['mp3'],
                 preload: true
@@ -57,6 +54,14 @@
         var getSongIndex = function(song) {
             return currentAlbum.songs.indexOf(song);
         };
+        
+        var stopSong = function(song) {
+            if (currentBuzzObject) {
+                currentBuzzObject.stop();
+            }
+            currentBuzzObject = null;
+            SongPlayer.currentSong.playing = null; 
+        }
 
         
          /**
@@ -64,6 +69,14 @@
           * @type {Object}
           */
          SongPlayer.currentSong = null;
+        
+        SongPlayer.currentSongTitle = function() {
+            if (SongPlayer.currentSong) {
+                return SongPlayer.currentSong.title;
+            } else {
+                return "";
+            }
+        }
         
         
         /**
@@ -75,13 +88,9 @@
             song = song || SongPlayer.currentSong;
             if (SongPlayer.currentSong !== song) {
                 setSong(song);
-                //currentBuzzObject.play();
-                //song.playing = true;
                 playSong();
             }  else if (SongPlayer.currentSong === song) {
                 if (currentBuzzObject.isPaused()) {
-                    //currentBuzzObject.play();
-                    //song.playing = true;
                     playSong();
                 }
             }          
@@ -107,8 +116,24 @@
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex--;
             if (currentSongIndex < 0) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
+                stopSong();
+            } else {
+                var song = currentAlbum.songs[currentSongIndex];
+                setSong(song);
+                playSong();
+            }
+        };
+        /**
+         * @function next
+         * @desc sets the current song to the next song on the current album, and plays it
+         */
+        
+        SongPlayer.next = function() {
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex++;
+            var numSongs = currentAlbum.songs.length;
+            if (currentSongIndex >= numSongs) {
+                stopSong();
             } else {
                 var song = currentAlbum.songs[currentSongIndex];
                 setSong(song);
