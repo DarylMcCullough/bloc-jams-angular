@@ -59,8 +59,11 @@
             if (currentBuzzObject) {
                 currentBuzzObject.stop();
             }
+            if (SongPlayer.currentSong) {
+                SongPlayer.currentSong.playing = null;
+            }
             currentBuzzObject = null;
-            SongPlayer.currentSong.playing = null; 
+            SongPlayer.currentSong = null; 
         }
 
         
@@ -69,6 +72,15 @@
           * @type {Object}
           */
          SongPlayer.currentSong = null;
+        
+        SongPlayer.artist = function() {
+            if (currentAlbum) {
+                if (SongPlayer.currentSong) {
+                    return currentAlbum.artist;
+                }
+            }
+            return "";
+        }
         
         SongPlayer.currentSongTitle = function() {
             if (SongPlayer.currentSong) {
