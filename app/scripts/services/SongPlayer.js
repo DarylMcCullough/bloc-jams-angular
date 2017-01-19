@@ -86,6 +86,18 @@
         */
         SongPlayer.currentTime = null;
         
+       /**
+        * @desc Current playback time (in seconds) of currently playing song
+        * @type {Number}
+        */
+        SongPlayer.volume = 40;
+
+        
+       /**
+        * @function artist
+        * @desc the name of the artist of the current album
+        * @type {String}
+        */        
         SongPlayer.artist = function() {
             if (currentAlbum) {
                 if (SongPlayer.currentSong) {
@@ -93,16 +105,7 @@
                 }
             }
             return "";
-        }
-        
-        SongPlayer.currentSongTitle = function() {
-            if (SongPlayer.currentSong) {
-                return SongPlayer.currentSong.title;
-            } else {
-                return "";
-            }
-        }
-        
+        }    
         
         /**
          * @function play
@@ -175,6 +178,18 @@
             if (currentBuzzObject) {
                 currentBuzzObject.setTime(time);
             }
+        };
+        
+        /**
+         * @function setVolume
+         * @desc Set volume of currently playing song (on a scale of 1-100)
+         * @param {Number} volume
+         */
+        SongPlayer.setVolume = function(volume) {
+            if (currentBuzzObject) {
+                currentBuzzObject.setVolume(volume);
+            }
+            SongPlayer.volume = volume;
         };
         
         return SongPlayer;
