@@ -175,6 +175,8 @@
          * @param {Number} time
          */
         SongPlayer.setCurrentTime = function(time) {
+            console.log("here i am");
+            console.log("time: " + time);
             if (currentBuzzObject) {
                 currentBuzzObject.setTime(time);
             }
