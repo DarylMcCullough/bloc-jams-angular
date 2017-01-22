@@ -32,9 +32,16 @@
             });
             
             currentBuzzObject.bind('timeupdate', function() {
-                $rootScope.$apply(function() {
-                    SongPlayer.currentTime = currentBuzzObject.getTime();
-                });
+                //$rootScope.$apply(function() {
+                //    SongPlayer.currentTime = currentBuzzObject.getTime();
+                //});
+
+                for (var i=0; i< registeredScopes.length; i++) {
+                    scope = registeredScopes[i];
+                    scope.$apply(function() {
+                        SongPlayer.currentTime = currentBuzzObject.getTime();
+                    });
+                }
             });
 
             SongPlayer.currentSong = song;
@@ -72,7 +79,14 @@
             currentBuzzObject = null;
             SongPlayer.currentSong = null; 
         }
-
+        
+        var registeredScopes = [];
+        var registeredScope = null;
+        
+        SongPlayer.registerScope = function(scope) {
+            registeredScopes.push(scope);
+            //registeredScope = scope;
+        }
         
          /**
           * @desc current song object (or null if no song has been selected)
