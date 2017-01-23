@@ -46,6 +46,9 @@
             }
 
             SongPlayer.currentSong = song;
+            SongPlayer.artist = currentAlbum.artist;
+            SongPlayer.title = song.title;
+            SongPlayer.duration = song.duration;
         };
         
         
@@ -95,6 +98,24 @@
         SongPlayer.currentTime = null;
         
        /**
+        * @desc Name of currently playing song
+        * @type {String}
+        */
+        SongPlayer.title = null;
+        
+       /**
+        * @desc Name of artist of current album
+        * @type {String}
+        */
+        SongPlayer.artist = null;
+        
+       /**
+        * @desc Duration of current song
+        * @type {String}
+        */
+        SongPlayer.duration = null;
+        
+       /**
         * @desc Current volume (on a scale of 0-100)
         * @type {Number}
         */
@@ -105,23 +126,7 @@
         * @desc Indicates whether the current song is muted
         * @type {Boolean}
         */
-        SongPlayer.muted = false;
-        
-
-        
-       /**
-        * @function artist
-        * @desc the name of the artist of the current album
-        * @type {String}
-        */        
-        SongPlayer.artist = function() {
-            if (currentAlbum) {
-                if (SongPlayer.currentSong) {
-                    return currentAlbum.artist;
-                }
-            }
-            return "";
-        }    
+        SongPlayer.muted = false;  
         
         /**
          * @function play
