@@ -26,6 +26,10 @@
      width: 90%;
      min-height: 100%;
  }
+
+.player-bar .volume-control {
+    
+}
  
  .player-bar .control-group {
      display: table-cell;
@@ -79,6 +83,12 @@
      display: none;
  }
 
+.mute-unmute {
+    position: absolute;
+    top: -10px;
+ font-size: 0.8rem;
+
+}
 
  .seek-control {
      position: relative;
@@ -147,7 +157,9 @@
  
  .player-bar .volume {
      width: 25%;
-     text-align: right;
+     text-align: left;
+     left: 50px;
+     position: relative;
  }
 
  .player-bar .volume .icon {
@@ -176,7 +188,8 @@
          margin: 0 auto;
          padding: 0;
          width: 100%;
-         text-align: center;
+         text-align: left;
+         left: 0;
      }
      
      .player-bar .main-controls,
