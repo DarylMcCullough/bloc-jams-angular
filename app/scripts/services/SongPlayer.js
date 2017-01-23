@@ -40,6 +40,10 @@
             currentBuzzObject.bind("ended", function() {
                 SongPlayer.next();
             });
+            
+            if (SongPlayer.muted) {
+                currentBuzzObject.mute();
+            }
 
             SongPlayer.currentSong = song;
         };
@@ -91,10 +95,18 @@
         SongPlayer.currentTime = null;
         
        /**
-        * @desc Current playback time (in seconds) of currently playing song
+        * @desc Current volume (on a scale of 0-100)
         * @type {Number}
         */
         SongPlayer.volume = 40;
+        
+        
+       /**
+        * @desc Indicates whether the current song is muted
+        * @type {Boolean}
+        */
+        SongPlayer.muted = false;
+        
 
         
        /**
@@ -137,6 +149,30 @@
             song = song || SongPlayer.currentSong;
              currentBuzzObject.pause();
              song.playing = false;
+         };
+        
+        /**
+         * @function mute
+         * @desc mutes the currently playing song (if any)
+         */
+         SongPlayer.mute = function() {
+             SongPlayer.muted = true;
+             if (currentBuzzObject) {
+                 currentBuzzObject.mute();
+             }
+            
+         };
+        
+        /**
+         * @function unmute
+         * @desc unmutes the currently playing song (if any)
+         */
+         SongPlayer.unmute = function() {
+             SongPlayer.muted = false;
+             if (currentBuzzObject) {
+                 currentBuzzObject.unmute();
+             }
+            
          };
         
         /**
