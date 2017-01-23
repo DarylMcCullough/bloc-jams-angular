@@ -36,6 +36,10 @@
                     SongPlayer.currentTime = currentBuzzObject.getTime();
                 });
             });
+            
+            currentBuzzObject.bind("ended", function() {
+                SongPlayer.next();
+            });
 
             SongPlayer.currentSong = song;
         };
