@@ -1,9 +1,9 @@
 (function() {
-     function LandingCtrl() {
+     function LandingCtrl($scope) {
          this.heroTitle = "Turn the Music Up!";
      }
  
      angular
          .module('blocJams')
-         .controller('LandingCtrl', LandingCtrl);
+         .controller('LandingCtrl', ['$scope', LandingCtrl]);
  })();
