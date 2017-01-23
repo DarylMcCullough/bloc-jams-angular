@@ -15,6 +15,8 @@
          $scope.save = function() {
              alert("Okay, saved");
          }
+         
+         $scope.reset();
      }
  
      angular

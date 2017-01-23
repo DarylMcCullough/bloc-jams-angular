@@ -8,6 +8,10 @@
     z-index:2;
 }
 
+#myForm {
+    z-index:12;
+}
+
 .sign-up form {
     margin-top:3%;
 }
