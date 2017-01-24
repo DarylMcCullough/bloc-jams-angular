@@ -9,15 +9,24 @@
              email: "johndoe@acme.com"
          }
          
+        $scope.clear = {
+             firstName: "",
+             lastName: "",
+             userName: "",
+             password: "",
+             email: ""
+         }
+         
          $scope.reset = function() {
-             $scope.user = angular.copy($scope.master);
+             $scope.user = angular.copy($scope.clear);
          }
          $scope.save = function() {
-             alert("Okay, saved");
+             alert("If this were real, we would remember your data, but sorry, this is just a demo");
+             $scope.logOut();
          }
          
          $scope.reset();
-
+         
          $scope.show = function() {
              return false;
          }
@@ -57,10 +66,10 @@
         }
         
         $scope.finishLogIn = function() {
-            SharedData.put(STATE, LOGGING);
+            SharedData.put(STATE, LOGGED);
         }
         
-        $scope.signUp();
+        $scope.logOut();
      }
  
      angular

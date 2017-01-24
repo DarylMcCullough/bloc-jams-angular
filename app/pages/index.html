@@ -20,8 +20,9 @@
         </a>
         <div class="links-container">
             <a ui-sref="collection" class="navbar-link">collection</a>
-            <a ui-sref="collection" class="navbar-link">log in</a>
-            <a ui-sref="collection" class="navbar-link">Sign up</a>
+            <a class="navbar-link" ng-app="blocJams" ng-controller="SignUp" ng-show="!loggedIn()" ng-click="logIn()">log in</a>
+            <a class="navbar-link" ng-app="blocJams" ng-controller="SignUp" ng-show="!loggedIn()" ng-click="signUp()">Sign up</a>
+            <a class="navbar-link" ng-app="blocJams" ng-controller="SignUp" ng-show="loggedIn()" ng-click="logOut()">log out</a>
         </div>
     </nav>
      <ui-view></ui-view>

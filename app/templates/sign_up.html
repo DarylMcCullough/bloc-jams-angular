@@ -1,19 +1,23 @@
  <section class="sign-up" ng-app="blocJams" ng-controller="SignUp" ng-show="signingUp() || loggingIn()">
-     <div class="sign-up-text">Want Bloc Jams to remember you?<br>
-         Want it to remember your favorite songs, artists, and albums?<br>
+     <div class="sign-up-text" ng-show="signingUp()">Want Bloc Jams to remember you?<br>
+         Have all your favorite songs, artists, and albums waiting for you?<br>
          Sign up for a Bloc Jams account!</div>
+     <div class="sign-up-text" ng-show="loggingIn()">Welcome Back to Bloc Jams!</div>
      <form novalidate>
-        First Name:<br>
-         <input type="text" ng-model="user.firstName"><br>
-        Last Name:<br>
-          <input type="text" ng-model="user.lastName"><br>
-        User Name:<br>
-          <input type="text" ng-model="user.userName"><br>
-        Password:<br>
-           <input type="password" ng-model="user.password"><br>
-        Email:<br>
-           <input type="email" ng-model="user.email"><br>
-         <button ng-click="reset()">RESET</button>
-          <button ng-click="save()">SAVE</button>
+         <div ng-show="signingUp()">First Name:<br>
+         <input type="text" ng-model="user.firstName"></div>
+         <div ng-show="signingUp()">Last Name:<br>
+          <input type="text" ng-model="user.lastName"></div>
+         <div>User Name:<br>
+          <input type="text" ng-model="user.userName"></div>
+         <div>Password:<br>
+           <input type="password" ng-model="user.password"></div>
+         <div ng-show="signingUp()">Email:<br>
+           <input type="email" ng-model="user.email"></div>
+         <button ng-click="reset()">CLEAR</button>
+         <button ng-click="save()" ng-show="signingUp()">SAVE</button>
+         <button ng-click="finishLogIn()" ng-show="loggingIn()">LOG IN</button>
+         <button ng-click="logOut()">CANCEL</button>
+
      </form>
  </section>
