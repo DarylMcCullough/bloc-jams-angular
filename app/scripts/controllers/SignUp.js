@@ -1,5 +1,5 @@
 (function() {
-     function SignUp($scope) {
+     function SignUp($scope, SharedData) {
          $scope.display = true;
          $scope.master = {
              firstName: "John",
@@ -17,9 +17,10 @@
          }
          
          $scope.reset();
+
      }
  
      angular
          .module('blocJams')
-         .controller('SignUp', ['$scope', SignUp]);
+         .controller('SignUp', ['$scope', 'SharedData', SignUp]);
  })();
