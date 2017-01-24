@@ -15,18 +15,27 @@
              </a>
          </div>
          <div class="control-group currently-playing">
-             <h2 class="song-name">{{playerBar.songPlayer.currentSong.title}}</h2>
-             <h2 class="artist-song-mobile">{{playerBar.songPlayer.artist()}} - {{playerBar.songPlayer.currentSong.title}}</h2>
-             <h3 class="artist-name">{{playerBar.songPlayer.artist()}}</h3>
+             <h2 class="song-name">{{playerBar.songPlayer.title}}</h2>
+             <h2 class="artist-song-mobile">{{playerBar.songPlayer.artist}} - {{playerBar.songPlayer.title}}</h2>
+             <h3 class="artist-name">{{playerBar.songPlayer.artist}}</h3>
              <div class="seek-control">
-                  <seek-bar value="{{ playerBar.songPlayer.currentTime }}" max="{{ playerBar.songPlayer.currentSong.duration }}" on-change="playerBar.songPlayer.setCurrentTime(value)"></seek-bar>                 
+                  <seek-bar value="{{ playerBar.songPlayer.currentTime }}" max="{{ playerBar.songPlayer.duration }}" on-change="playerBar.songPlayer.setCurrentTime(value)"></seek-bar>                 
                  <div class="current-time">{{ playerBar.songPlayer.currentTime | timecode }}</div>
-                 <div class="total-time">{{playerBar.songPlayer.currentSong.duration | timecode}}</div>
+                 <div class="total-time">{{playerBar.songPlayer.duration | timecode}}</div>
              </div>
          </div>
          <div class="control-group volume">
-             <span class="icon ion-volume-high"></span>
-             <seek-bar value="{{ playerBar.songPlayer.volume }}" max="100" on-change="playerBar.songPlayer.setVolume(value)"></seek-bar>
+             <div class="mute-unmute" ng-show="hovered && !playerBar.songPlayer.muted">Mute</div>
+             <div class="mute-unmute" ng-show="hovered && playerBar.songPlayer.muted">Unmute</div>
+             <div class="volume-control">
+                 <a class="volume-icon" ng-mouseover="hovered = true" ng-mouseout="hovered = false" ng-show="!playerBar.songPlayer.muted" ng-click="playerBar.songPlayer.mute()">
+                     <span class="icon ion-volume-high"></span>
+                 </a>
+                  <a class="volume-icon" ng-mouseover="hovered = true" ng-mouseout="hovered = false" ng-show="playerBar.songPlayer.muted" ng-click="playerBar.songPlayer.unmute()">
+                     <span class="icon ion-volume-mute"></span>
+                 </a>
+                <seek-bar value="{{ playerBar.songPlayer.volume }}" max="100" on-change="playerBar.songPlayer.setVolume(value)"></seek-bar>
+             </div>
          </div>
      </div>
  </section>

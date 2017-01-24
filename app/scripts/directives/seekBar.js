@@ -32,6 +32,9 @@
                     var value = scope.value;
                     var max = scope.max;
                     var percent = value / max * 100;
+                    if (isNaN(percent)) {
+                        percent = "0.0";
+                    }
                     return percent + "%";
                 };
  

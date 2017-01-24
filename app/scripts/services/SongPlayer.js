@@ -36,8 +36,19 @@
                     SongPlayer.currentTime = currentBuzzObject.getTime();
                 });
             });
+            
+            currentBuzzObject.bind("ended", function() {
+                SongPlayer.next();
+            });
+            
+            if (SongPlayer.muted) {
+                currentBuzzObject.mute();
+            }
 
             SongPlayer.currentSong = song;
+            SongPlayer.artist = currentAlbum.artist;
+            SongPlayer.title = song.title;
+            SongPlayer.duration = song.duration;
         };
         
         
@@ -87,25 +98,35 @@
         SongPlayer.currentTime = null;
         
        /**
-        * @desc Current playback time (in seconds) of currently playing song
+        * @desc Name of currently playing song
+        * @type {String}
+        */
+        SongPlayer.title = null;
+        
+       /**
+        * @desc Name of artist of current album
+        * @type {String}
+        */
+        SongPlayer.artist = null;
+        
+       /**
+        * @desc Duration of current song
+        * @type {String}
+        */
+        SongPlayer.duration = null;
+        
+       /**
+        * @desc Current volume (on a scale of 0-100)
         * @type {Number}
         */
         SongPlayer.volume = 40;
-
+        
         
        /**
-        * @function artist
-        * @desc the name of the artist of the current album
-        * @type {String}
-        */        
-        SongPlayer.artist = function() {
-            if (currentAlbum) {
-                if (SongPlayer.currentSong) {
-                    return currentAlbum.artist;
-                }
-            }
-            return "";
-        }    
+        * @desc Indicates whether the current song is muted
+        * @type {Boolean}
+        */
+        SongPlayer.muted = false;  
         
         /**
          * @function play
@@ -133,6 +154,30 @@
             song = song || SongPlayer.currentSong;
              currentBuzzObject.pause();
              song.playing = false;
+         };
+        
+        /**
+         * @function mute
+         * @desc mutes the currently playing song (if any)
+         */
+         SongPlayer.mute = function() {
+             SongPlayer.muted = true;
+             if (currentBuzzObject) {
+                 currentBuzzObject.mute();
+             }
+            
+         };
+        
+        /**
+         * @function unmute
+         * @desc unmutes the currently playing song (if any)
+         */
+         SongPlayer.unmute = function() {
+             SongPlayer.muted = false;
+             if (currentBuzzObject) {
+                 currentBuzzObject.unmute();
+             }
+            
          };
         
         /**
